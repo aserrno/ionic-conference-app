@@ -11,6 +11,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AuthService } from './core/services/auth/auth.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -21,10 +27,14 @@ import { FormsModule } from '@angular/forms';
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser],
+  providers: [InAppBrowser, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

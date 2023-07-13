@@ -15,7 +15,7 @@
 
   <div class="login-form">
     <form #loginForm="ngForm" novalidate>
-      <ion-input
+      <!-- <ion-input
         label="Username"
         labelPlacement="stacked"
         fill="solid"
@@ -39,14 +39,19 @@
         #password="ngModel"
         errorText="Password is required"
         required>
-      </ion-input>
+      </ion-input> -->
 
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>
           <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
         </ion-col>
         <ion-col>
           <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="loginGoogle()" expand="block">Google</ion-button>
         </ion-col>
       </ion-row>
     </form>

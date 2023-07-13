@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserData } from '../../providers/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
+import * as auth from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { User } from '../../interfaces/user.model';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 
 
@@ -14,24 +16,17 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
-  submitted = false;
 
   constructor(
-    public userData: UserData,
-    public router: Router
+    private authService: AuthService,
+    public router: Router,
   ) { }
 
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
-    }
+  async loginGoogle() {
+    await this.authService.GoogleAuth();
   }
 
-  onSignup() {
-    this.router.navigateByUrl('/signup');
-  }
+   
+
+  
 }
